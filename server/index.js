@@ -46,6 +46,8 @@ function socketStart(server) {
   // websocketサーバに接続された時
   io.on('connection', (socket) => {
     consola.log('[info] id:' + socket.id + 'is connected')
+    // サーバからクライアントへ発信
+    socket.emit('message', 'hello, world')
   })
 }
 start()

@@ -1,5 +1,5 @@
 <template>
-  <p>ここにwebsocketの画面を設置する</p>
+  <p>{{ message }}</p>
 </template>
 
 <script>
@@ -8,11 +8,16 @@ import io from 'socket.io-client'
 export default {
   data() {
     return {
-      socket: ''
+      socket: '',
+      message: ''
     }
   },
   mounted() {
     this.socket = io()
+
+    this.socket.on('message', (message) => {
+      this.message = message
+    })
   }
 }
 </script>
