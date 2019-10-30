@@ -25,10 +25,27 @@ async function start() {
   app.use(nuxt.render)
 
   // Listen the server
-  app.listen(port, host)
+  const server = app.listen(port, host)
+
   consola.ready({
     message: `Server listening on http://${host}:${port}`,
     badge: true
+  })
+
+  // websocket
+  socketStart(server)
+  consola.ready({
+    message: 'Socket.IO start',
+    badge: true
+  })
+}
+
+function socketStart(server) {
+  const io = require('socket.io').listen(server)
+
+  // websocketサーバに接続された時
+  io.on('connection', (socket) => {
+    consola.log('[info] id:' + socket.id + 'is connected')
   })
 }
 start()
