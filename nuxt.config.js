@@ -80,6 +80,7 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
+    vender: ['socket.io-client'],
     extend(config, ctx) {}
   }
 }
